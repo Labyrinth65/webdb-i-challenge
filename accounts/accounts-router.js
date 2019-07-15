@@ -38,7 +38,10 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
 	const account = req.body;
 	accountsDB("accounts")
-		.insert(account)
+		.insert(
+			account
+			//, "id" <- because of PostGRES
+		)
 		.then(arrayOfIds => {
 			const idOfLastRecordInserted = arrayOfIds[0];
 			res.status(201).json(idOfLastRecordInserted);
